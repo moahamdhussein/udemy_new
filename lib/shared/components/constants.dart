@@ -13,5 +13,4 @@
 // Method {URL} :  v2/everything?
 // queries :q=tesla&apiKey=788669a2636e4ad180009c2a18c3f7be
 
-
 // https://newsapi.org/v2/everything?q=tesla&apiKey=788669a2636e4ad180009c2a18c3f7be

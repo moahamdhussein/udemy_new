@@ -1,4 +1,3 @@
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -24,21 +23,17 @@ class NewsLayout extends StatelessWidget {
             actions: [
               IconButton(
                 icon: Icon(Icons.search),
-                onPressed: ()
-                {
+                onPressed: () {
                   navigateTo(
-                      context,
-                      SearchScreen(),
+                    context,
+                    SearchScreen(),
                   );
                 },
               ),
               IconButton(
                 icon: Icon(Icons.brightness_4_outlined),
-                onPressed: () {
-
-                },
+                onPressed: () {},
               ),
-
             ],
           ),
           body: cubit.screens[cubit.currentIndex],

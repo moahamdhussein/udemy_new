@@ -3,8 +3,6 @@
 import 'package:udemy_new/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 
-
-
 class UsersScreen extends StatelessWidget {
   List<UserModel> users = [
     UserModel(
@@ -38,6 +36,7 @@ class UsersScreen extends StatelessWidget {
       name: 'hema',
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

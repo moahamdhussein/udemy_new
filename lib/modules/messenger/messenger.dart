@@ -102,8 +102,8 @@ class Messenger_Screen extends StatelessWidget {
               ),
               // list view for chats
               ListView.separated(
-                  physics:
-                      NeverScrollableScrollPhysics(), // to make list view do not scroll
+                  physics: NeverScrollableScrollPhysics(),
+                  // to make list view do not scroll
                   shrinkWrap: true,
                   itemBuilder: (context, index) => builChatItem(),
                   separatorBuilder: (context, index) => SizedBox(

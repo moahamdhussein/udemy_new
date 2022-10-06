@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:udemy_new/modules/login/login_screen.dart';
 import 'bmi_results/bmi_result_screen.dart';
 
-
-
 class Bmi_Screen extends StatefulWidget {
   @override
   _Bmi_ScreenState createState() => _Bmi_ScreenState();
@@ -180,7 +178,6 @@ class _Bmi_ScreenState extends State<Bmi_Screen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
-
                                 onPressed: () {
                                   setState(() {
                                     weight--;
@@ -299,4 +296,3 @@ class _Bmi_ScreenState extends State<Bmi_Screen> {
     );
   }
 }
-

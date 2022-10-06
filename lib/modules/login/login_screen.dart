@@ -51,15 +51,12 @@ class _Login_ScreenState extends State<Login_Screen> {
                       type: TextInputType.emailAddress,
                       onSubmit: (String value) {},
                       onChange: (String value) {},
-                      validate: (String value)
-                      {
-                        if(value.isEmpty){
+                      validate: (String value) {
+                        if (value.isEmpty) {
                           return "email must not be empty ";
                         }
                         return null;
-
                       }),
-
 
                   SizedBox(
                     height: 20.0,
@@ -67,29 +64,25 @@ class _Login_ScreenState extends State<Login_Screen> {
                   // password field
                   defaultFormField(
                       controller: passwordController,
-                      type: TextInputType.visiblePassword
-                      , validate: (String value){
-                        if(value.isEmpty){
+                      type: TextInputType.visiblePassword,
+                      validate: (String value) {
+                        if (value.isEmpty) {
                           return 'password must not be empty';
                         }
                         return null;
-                  },
+                      },
                       label: "password",
                       prefix: Icons.lock,
-                    suffix: isPassword ? Icons.visibility : Icons.visibility_off,
-                    isPassword: isPassword,
-                    onChange: (String value){},
-                    onSubmit: (String value){},
-                    suffixPressed: ()
-                    {
-                      setState(()
-                      {
-                        isPassword = !isPassword;
-
-                      });
-
-                    }
-                  ),
+                      suffix:
+                          isPassword ? Icons.visibility : Icons.visibility_off,
+                      isPassword: isPassword,
+                      onChange: (String value) {},
+                      onSubmit: (String value) {},
+                      suffixPressed: () {
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+                      }),
                   SizedBox(
                     height: 20.0,
                   ),

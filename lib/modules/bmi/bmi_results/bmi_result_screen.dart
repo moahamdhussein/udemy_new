@@ -3,15 +3,12 @@
 import 'package:flutter/material.dart';
 
 class BmiResultScreen extends StatelessWidget {
-   double? result;
-   bool isMale;
-   int? age;
+  double? result;
+  bool isMale;
+  int? age;
 
-  BmiResultScreen({
-   @required this.result,
-   @required this.age,
-   required this.isMale
-});
+  BmiResultScreen(
+      {@required this.result, @required this.age, required this.isMale});
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +16,21 @@ class BmiResultScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         leading: IconButton(
-          onPressed: ()
-          {
+          onPressed: () {
             Navigator.pop(context);
-
           },
-          icon: Icon(
-              Icons.keyboard_arrow_left
-          ),
+          icon: Icon(Icons.keyboard_arrow_left),
         ),
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
-        title: Text(
-          'Bmi result'
-        ),
+        title: Text('Bmi result'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment:  MainAxisAlignment.center,
-
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Text(
-              'Gender : ${isMale ? 'male' :'female'}',
+              'Gender : ${isMale ? 'male' : 'female'}',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,

@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, invalid_required_named_param, void_checks
 
-
 import 'dart:ui';
 
 import 'package:udemy_new/layout/news_app/cubit.dart';
@@ -51,270 +50,203 @@ Widget defaultFormField({
   required IconData prefix,
   IconData? suffix,
   Function? suffixPressed,
-  bool isClickable =true,
+  bool isClickable = true,
 }) =>
     TextFormField(
       controller: controller,
       style: TextStyle(color: colors),
       keyboardType: type,
       obscureText: isPassword,
-      onFieldSubmitted: (String value)  => onSubmit!(value),
+      onFieldSubmitted: (String value) => onSubmit!(value),
       onChanged: (String value) => onChange!(value),
-      validator: (String? value) => validate(value) ,
-      onTap: () =>  onTab!(),
+      validator: (String? value) => validate(value),
+      onTap: () => onTab!(),
       enabled: isClickable,
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(
-            prefix
-        ),
-
-
-        suffixIcon: suffix !=null ? IconButton(
-          onPressed:(){
-            suffixPressed!();
-          } ,
-          icon:
-          Icon(
-              suffix
-          ),
-        ) : null,
-
+        prefixIcon: Icon(prefix),
+        suffixIcon: suffix != null
+            ? IconButton(
+                onPressed: () {
+                  suffixPressed!();
+                },
+                icon: Icon(suffix),
+              )
+            : null,
         border: OutlineInputBorder(),
       ),
     );
-Widget buildTaskItem(Map model , context) =>Dismissible(
-  key: Key(model['id'].toString()),
-  child:   Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: Row
-      (
-      children:
-      [
-        CircleAvatar(
-          radius: 40.0,
-          child: Text(
-            '${model['time']}'
-          ),
-        ),
-        SizedBox(
-          width: 20.0,
-        ),
-        Expanded(
-          child: Column(
-            mainAxisSize:  MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${model['title']}',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+
+Widget buildTaskItem(Map model, context) => Dismissible(
+      key: Key(model['id'].toString()),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 40.0,
+              child: Text('${model['time']}'),
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${model['title']}',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    '${model['date']}',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                '${model['date']}',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            IconButton(
+                onPressed: () {
+                  AppCubit.get(context).updateData(
+                    status: "done",
+                    id: model['id'],
+                  );
+                },
+                icon: Icon(
+                  Icons.check_box,
+                  color: Colors.green,
+                )),
+            IconButton(
+                onPressed: () {
+                  AppCubit.get(context).updateData(
+                    status: "archived",
+                    id: model['id'],
+                  );
+                },
+                icon: Icon(
+                  Icons.archive,
+                  color: Colors.black45,
+                )),
+          ],
         ),
-        SizedBox(
-          width: 20.0,
-        ),
-        IconButton(
-            onPressed: ()
-            {
-              AppCubit.get(context).updateData(
-                status: "done",
-                id: model['id'],
-              );
-            },
-            icon: Icon
-              (
-              Icons.check_box,
-              color: Colors.green,
-            )
-        ),
-        IconButton(
-            onPressed: ()
-            {
-              AppCubit.get(context).updateData(
-                status: "archived",
-                id: model['id'],
-              );
-            },
-            icon:
-            Icon
-              (
-              Icons.archive,
-              color: Colors.black45,
-            )
-        ),
-
-      ],
-
-    ),
-
-  ),
-  onDismissed: (direction)
-  {
-    AppCubit.get(context).deleteData(id: model['id']);
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+      ),
+      onDismissed: (direction) {
+        AppCubit.get(context).deleteData(id: model['id']);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
-           ' deleted item where title is : ${model['title']}',
+            ' deleted item where title is : ${model['title']}',
             style: TextStyle(
               color: Colors.amber,
               fontSize: 15,
             ),
           ),
-        )
+        ));
+      },
+      background: Container(color: Colors.indigoAccent),
     );
-  },
-  background: Container(color: Colors.indigoAccent),
-  
-);
 
- checkUrl( url ){
-  if( url != null){
+checkUrl(url) {
+  if (url != null) {
     return url;
   }
   return 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png';
-
 }
 
-Widget buildArticleItem(article , context) => InkWell(
-  onTap: (){
-    navigateTo(
-      context,
-      WebViewScreen(article['url']),
-    );
-  },
-  child:   Padding(
-  
-    padding: const EdgeInsets.all(20.0),
-  
-    child: Row(
-  
-      children: [
-  
-        Container(
-  
-          width: 120,
-  
-          height: 120,
-  
-          decoration: BoxDecoration(
-  
-              borderRadius: BorderRadius.circular(10.0),
-  
-              image: DecorationImage(
-  
-                image: NetworkImage(
-  
-                 '${checkUrl(article['urlToImage'])}'
-  
-                ),
-  
-                fit: BoxFit.cover,
-  
-              )),
-  
-        ),
-  
-        SizedBox(
-  
-          width: 20.0,
-  
-        ),
-  
-        Expanded(
-  
-          child: Container(
-  
-            height: 120,
-  
-            child: Column(
-  
-  
-  
-              crossAxisAlignment: CrossAxisAlignment.start ,
-  
-              mainAxisAlignment: MainAxisAlignment.start,
-  
-              children: [
-  
-                Expanded(
-  
-                  child: Text(
-  
-                    "${article['title']}",
-  
-                    style:Theme.of(context).textTheme.bodyText1,
-  
-                    maxLines: 3,
-  
-                    overflow: TextOverflow.ellipsis,
-  
-                  ),
-  
-  
-  
-                ),
-  
-                Text(
-  
-                  "${article['publishedAt']}",
-  
-                  style: TextStyle(color: Colors.grey),
-  
-                )
-  
-              ],
-  
+Widget buildArticleItem(article, context) => InkWell(
+      onTap: () {
+        navigateTo(
+          context,
+          WebViewScreen(article['url']),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                    image: NetworkImage('${checkUrl(article['urlToImage'])}'),
+                    fit: BoxFit.cover,
+                  )),
             ),
-  
-          ),
-  
-        )
-  
-      ],
-  
-    ),
-  
-  ),
-);
+            SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Container(
+                height: 120,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "${article['title']}",
+                        style: Theme.of(context).textTheme.bodyText1,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      "${article['publishedAt']}",
+                      style: TextStyle(color: Colors.grey),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
 
 Widget mySeparator() => Container(
-  width: double.infinity,
-  height: 1,
-  color: Colors.blueAccent,
-);
-Widget condition(var list , context , {isSearch = false}){
-  if(list.isEmpty)
-  {
-    return isSearch ? Container(child: Center(child: Text('please write something to search ' , style:  TextStyle(fontSize: 21 , color: Colors.white),),),) : Center(child: CircularProgressIndicator());
-  }
-  else {
+      width: double.infinity,
+      height: 1,
+      color: Colors.blueAccent,
+    );
+
+Widget condition(var list, context, {isSearch = false}) {
+  if (list.isEmpty) {
+    return isSearch
+        ? Container(
+            child: Center(
+              child: Text(
+                'please write something to search ',
+                style: TextStyle(fontSize: 21, color: Colors.white),
+              ),
+            ),
+          )
+        : Center(child: CircularProgressIndicator());
+  } else {
     return ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemBuilder: (context , index)
-        {
-          return buildArticleItem(list[index],context);
+        itemBuilder: (context, index) {
+          return buildArticleItem(list[index], context);
         },
-        separatorBuilder: (context , index)
-        {
+        separatorBuilder: (context, index) {
           return mySeparator();
         },
-        itemCount:list.length);
+        itemCount: list.length);
   }
 }
-void navigateTo(context , widget){
+
+void navigateTo(context, widget) {
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -322,5 +254,3 @@ void navigateTo(context , widget){
     ),
   );
 }
-
-

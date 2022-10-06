@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,16 +44,13 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-          children: [
+      body: Column(children: [
         Padding(
           padding: const EdgeInsets.all(50.0),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.only(
-                topStart: Radius.circular(20)
-
-              ),
+              borderRadius:
+                  BorderRadiusDirectional.only(topStart: Radius.circular(20)),
             ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Stack(
@@ -69,11 +65,10 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Container(
                   color: Colors.black.withOpacity(0.45),
-
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
                     horizontal: 10,
-                  ) ,
+                  ),
                   child: Text(
                     'GOT',
                     textAlign: TextAlign.center,
